@@ -1,0 +1,16 @@
+{
+    "name": "ecommerceSite",
+    "version": "1.0.0",
+    "description": "A Simple e-commerce web site from Scratch",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "dev": "nodemon index.js"
+    },
+    "keywords": [],
+    "author": "Bineet Naidu",
+    "license": "MIT",
+    "dependencies": {
+        "express": "^4.17.1"
+    }
+}
