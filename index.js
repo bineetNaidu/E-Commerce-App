@@ -13,6 +13,18 @@ app.get("/", (req, res) => {
 `);
 });
 
-app.post("/", (req, res) => console.log("Account Created!"));
+app.post("/", (req, res) => {
+    // get access to email, password, passwordConfirmation
+    req.on("data", (data) => {
+        const parsed = data.toString("utf8").split("&");
+        const formData = {};
+        for (const pair of parsed) {
+            const [key, value] = pair.split("=");
+            formData[key] = value;
+        }
+        console.log(formData);
+    });
+    console.log("Account Created!");
+});
 
 app.listen(process.env.PORT || 3000, () => console.log("Server started"));
