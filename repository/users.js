@@ -23,10 +23,18 @@ class UserRepository {
         // Return the parsed data
         return data;
     }
-}
 
+    async create(attrs) {
+        // load the file first
+        const records = await this.getAll();
+        records.push(attrs);
+        // write the updated arrays
+        await fs.promises.writeFile(this.filename, JSON.stringify(records));
+    }
+}
 const test = async () => {
     const repo = new UserRepository("users.json");
+    await repo.create({ email: "test@test.com", password: "password" });
     const data = await repo.getAll();
     console.log(data);
 };
