@@ -31,6 +31,7 @@ class UserRepository {
         records.push(attrs);
         // write the updated arrays
         await this.writeAll(records);
+        return attrs;
     }
 
     async writeAll(records) {
