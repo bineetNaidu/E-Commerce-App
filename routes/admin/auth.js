@@ -5,9 +5,12 @@ const {
     requireEmail,
     requirePassword,
     checkPassword,
+    signinEmail,
+    signinPassword,
 } = require("./validators");
 const signinTMP = require("../../views/admin/auth/signin");
 const { validationResult } = require("express-validator");
+const signin = require("../../views/admin/auth/signin");
 
 router.get("/signup", (req, res) => {
     res.send(signupTMP({ req }));
@@ -37,19 +40,17 @@ router.get("/signout", (req, res) => {
 });
 
 router.get("/signin", (req, res) => {
-    res.send(signinTMP());
+    res.send(signinTMP({}));
 });
 
-router.post("/signin", async (req, res) => {
-    const { email, password } = req.body;
+router.post("/signin", [signinEmail, signinPassword], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.send(signinTMP({ errors }));
+    }
+    const { email } = req.body;
     //check in DB
     const user = await usersRepo.getOneBy({ email });
-    if (!user) res.send("Email Not Found");
-    const validPasword = await usersRepo.comparePassword(
-        user.password,
-        password
-    );
-    if (!validPasword) res.send("Invalid Password");
     req.session.userId = user.id;
     res.send("You are sign IN!");
 });
