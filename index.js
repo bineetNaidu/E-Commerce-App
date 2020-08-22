@@ -1,9 +1,12 @@
-const app = require("express")();
+const express = require("express");
+const app = express();
+const path = require("path");
 const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 
 // middlewares
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(
     cookieSession({
         keys: ["fhghgfy5d5dx6d64d6d44ddfcggg5edf3ufcas"],
