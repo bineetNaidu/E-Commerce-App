@@ -7,7 +7,7 @@ const {
     checkPassword,
 } = require("./validators");
 const signinTMP = require("../../views/admin/auth/signin");
-const { check, validationResult } = require("express-validator");
+const { validationResult } = require("express-validator");
 
 router.get("/signup", (req, res) => {
     res.send(signupTMP({ req }));
@@ -18,7 +18,9 @@ router.post(
     [requireEmail, requirePassword, checkPassword],
     async (req, res) => {
         const errors = validationResult(req);
-        console.log(errors);
+        if (!errors.isEmpty()) {
+            return res.send(signupTMP({ req, errors }));
+        }
         const { email, password } = req.body;
 
         // create a user in our repo
