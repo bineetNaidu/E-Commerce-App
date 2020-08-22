@@ -15,5 +15,6 @@ app.use(
 
 // mounting routers
 app.use(require("./routes/admin/auth"));
+app.use(require("./routes/admin/products"));
 
 app.listen(process.env.PORT || 3000, () => console.log("Server started"));
