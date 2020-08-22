@@ -10,7 +10,6 @@ const {
 } = require("./validators");
 const signinTMP = require("../../views/admin/auth/signin");
 const { validationResult } = require("express-validator");
-const signin = require("../../views/admin/auth/signin");
 
 router.get("/signup", (req, res) => {
     res.send(signupTMP({ req }));
