@@ -44,6 +44,13 @@ module.exports = {
             );
             if (!validPasword) throw new Error("Invalid Password");
         }),
-    requireTitle: check("title").trim().isLength({ min: 5, max: 40 }),
-    requirePrice: check("price").trim().toFloat().isFloat({ min: 1 }),
+    requireTitle: check("title")
+        .trim()
+        .isLength({ min: 5, max: 40 })
+        .withMessage("Must be 5 to 40 character long"),
+    requirePrice: check("price")
+        .trim()
+        .toFloat()
+        .isFloat({ min: 1 })
+        .withMessage("Price must be greater than 1"),
 };
