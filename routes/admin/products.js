@@ -6,6 +6,7 @@ const { validationResult } = require("express-validator");
 const { requireTitle, requirePrice } = require("./validators");
 const multer = require("multer");
 const upload = multer({ storage: multer.memoryStorage() });
+const { handleErrors } = require("./middlewares");
 
 router.get("/admin/products", (req, res) => {});
 router.get("/admin/products/new", (req, res) => {
