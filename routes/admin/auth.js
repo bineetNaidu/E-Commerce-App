@@ -48,7 +48,7 @@ router.post(
         //check in DB
         const user = await usersRepo.getOneBy({ email });
         req.session.userId = user.id;
-        res.send("You are sign IN!");
+        res.redirect("/admin/products");
     }
 );
 
