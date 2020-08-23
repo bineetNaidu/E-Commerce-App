@@ -30,7 +30,7 @@ router.post("/cart/products", async (req, res) => {
             items: cart.items,
         });
 
-        res.send("Product added to cart!");
+        res.redirect("/cart");
     } catch (error) {
         console.log(error);
     }
@@ -49,6 +49,14 @@ router.get("/cart", async (req, res) => {
         item.product = product;
     }
     res.send(cartShowTMP({ items: cart.items }));
+});
+router.post("/cart/products/delete", async (req, res) => {
+    const { itemId } = req.body;
+    const cart = await cartsRepo.getOne(req.session.cartId);
+    const items = cart.items.filter((item) => item.id !== itemId);
+
+    await cartsRepo.update(req.session.cartId, { items });
+    res.redirect("/cart");
 });
 
 module.exports = router;
