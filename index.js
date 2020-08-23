@@ -15,6 +15,7 @@ app.use(
 
 // mounting routers
 app.use(require("./routes/products"));
+app.use(require("./routes/carts"));
 app.use(require("./routes/admin/auth"));
 app.use(require("./routes/admin/products"));
 
